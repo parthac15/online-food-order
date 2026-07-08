@@ -1,0 +1,48 @@
+# Render Blueprint for FoodFlow Microservices
+# Note: Render Free Tier provides 512MB RAM per service. 
+# Running 4 Java services might exceed free tier limits.
+
+services:
+  - type: web
+    name: order-service
+    env: docker
+    region: ohio
+    plan: free
+    dockerCommand: java -jar order-service/target/order-service-1.0.0.jar
+    healthCheckPath: /api/orders
+    envVars:
+      - key: PORT
+        value: 8080
+
+  - type: web
+    name: payment-service
+    env: docker
+    region: ohio
+    plan: free
+    dockerCommand: java -jar payment-service/target/payment-service-1.0.0.jar
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8081
+
+  - type: web
+    name: kitchen-service
+    env: docker
+    region: ohio
+    plan: free
+    dockerCommand: java -jar kitchen-service/target/kitchen-service-1.0.0.jar
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8082
+
+  - type: web
+    name: delivery-service
+    env: docker
+    region: ohio
+    plan: free
+    dockerCommand: java -jar delivery-service/target/delivery-service-1.0.0.jar
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8083

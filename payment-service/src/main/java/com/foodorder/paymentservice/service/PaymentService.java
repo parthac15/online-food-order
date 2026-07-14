@@ -19,7 +19,7 @@ public class PaymentService {
     private final Random random = new Random();
 
     public PaymentResponse processPayment(PaymentRequest request) {
-        log.info("Processing payment for orderId: {}, amount: {}", request.getOrderId(), request.getAmount());
+        log.info("[PaymentService] Order #{} - Payment processing...", request.getOrderId());
 
         // Simulate payment: 80% success rate
         boolean isSuccess = random.nextInt(100) < 80;
@@ -31,7 +31,7 @@ public class PaymentService {
         payment.setStatus(status);
 
         Payment saved = paymentRepository.save(payment);
-        log.info("Payment {} for orderId: {} - Status: {}", saved.getId(), request.getOrderId(), status);
+        log.info("[PaymentService] Order #{} - Payment processing... {}", request.getOrderId(), status);
 
         return new PaymentResponse(saved.getId(), saved.getOrderId(), saved.getStatus());
     }

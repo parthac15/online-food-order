@@ -18,7 +18,7 @@ public class KitchenService {
     private final KitchenTicketRepository kitchenTicketRepository;
 
     public KitchenResponse prepareFood(KitchenRequest request) {
-        log.info("Received kitchen ticket for orderId: {}, item: {}", request.getOrderId(), request.getItem());
+        log.info("[KitchenService] Order #{} - Kitchen ticket created for item: {}", request.getOrderId(), request.getItem());
 
         // Create ticket with RECEIVED status
         KitchenTicket ticket = new KitchenTicket();
@@ -29,7 +29,7 @@ public class KitchenService {
 
         // Simulate cooking time (2 seconds)
         try {
-            log.info("Preparing food for orderId: {} ...", request.getOrderId());
+            log.info("[KitchenService] Order #{} - Kitchen ticket created, preparing food...", request.getOrderId());
             ticket.setStatus("PREPARING");
             kitchenTicketRepository.save(ticket);
             Thread.sleep(2000);
@@ -42,7 +42,7 @@ public class KitchenService {
         ticket.setTicketCompletedAt(LocalDateTime.now());
         KitchenTicket saved = kitchenTicketRepository.save(ticket);
 
-        log.info("Food READY for orderId: {}", request.getOrderId());
+        log.info("[KitchenService] Order #{} - Kitchen ticket created, preparing food... READY", request.getOrderId());
 
         return new KitchenResponse(saved.getId(), saved.getOrderId(), saved.getStatus());
     }

@@ -1,6 +1,7 @@
 # Render Blueprint for FoodFlow Microservices
-# Note: Render Free Tier provides 512MB RAM per service. 
-# Running 4 Java services might exceed free tier limits.
+# Deploy with: Render Dashboard → New Blueprint Instance → Connect Repo
+# Note: Each service builds the full Maven project; only the target JAR differs.
+# Recommended: Starter plan ($7/mo per service) — free tier (512MB) is tight for Spring Boot + Camunda.
 
 services:
   - type: web
@@ -8,41 +9,49 @@ services:
     env: docker
     region: ohio
     plan: free
-    dockerCommand: java -jar order-service/target/order-service-1.0.0.jar
+    dockerfilePath: ./Dockerfile.order
     healthCheckPath: /api/orders
     envVars:
       - key: PORT
         value: 8080
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m
 
   - type: web
     name: payment-service
     env: docker
     region: ohio
     plan: free
-    dockerCommand: java -jar payment-service/target/payment-service-1.0.0.jar
-    healthCheckPath: /
+    dockerfilePath: ./Dockerfile.payment
+    healthCheckPath: /api/payments
     envVars:
       - key: PORT
         value: 8081
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m
 
   - type: web
     name: kitchen-service
     env: docker
     region: ohio
     plan: free
-    dockerCommand: java -jar kitchen-service/target/kitchen-service-1.0.0.jar
-    healthCheckPath: /
+    dockerfilePath: ./Dockerfile.kitchen
+    healthCheckPath: /api/kitchen/health
     envVars:
       - key: PORT
         value: 8082
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m
 
   - type: web
     name: delivery-service
     env: docker
     region: ohio
     plan: free
-    dockerCommand: java -jar delivery-service/target/delivery-service-1.0.0.jar
-    healthCheckPath: /
+    dockerfilePath: ./Dockerfile.delivery
+    healthCheckPath: /api/deliveries/health
     envVars:
       - key: PORT
         value: 8083
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx400m

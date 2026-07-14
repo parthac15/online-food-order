@@ -26,7 +26,7 @@ public class DeliveryService {
     );
 
     public DeliveryResponse assignDelivery(DeliveryRequest request) {
-        log.info("Assigning delivery for orderId: {}", request.getOrderId());
+        log.info("[DeliveryService] Order #{} - Driver assigned, delivering...", request.getOrderId());
 
         // Pick a random driver
         String driverName = DRIVERS.get(random.nextInt(DRIVERS.size()));
@@ -41,7 +41,7 @@ public class DeliveryService {
         try {
             delivery.setStatus("IN_TRANSIT");
             deliveryRepository.save(delivery);
-            log.info("Driver {} is IN_TRANSIT for orderId: {}", driverName, request.getOrderId());
+            log.info("[DeliveryService] Order #{} - Driver {} is IN_TRANSIT", request.getOrderId(), driverName);
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -52,7 +52,8 @@ public class DeliveryService {
         delivery.setDeliveredAt(LocalDateTime.now());
         Delivery saved = deliveryRepository.save(delivery);
 
-        log.info("Order {} DELIVERED by driver: {}", request.getOrderId(), driverName);
+        log.info("[DeliveryService] Order #{} - Driver assigned, delivering... DELIVERED (Driver: {})",
+                request.getOrderId(), driverName);
 
         return new DeliveryResponse(saved.getId(), saved.getOrderId(), saved.getDriverName(), saved.getStatus());
     }

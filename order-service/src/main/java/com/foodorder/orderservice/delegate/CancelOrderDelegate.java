@@ -18,6 +18,6 @@ public class CancelOrderDelegate implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         Long orderId = (Long) execution.getVariable("orderId");
         orderService.updateOrderStatus(orderId, "CANCELLED");
-        log.info("[CAMUNDA] Order {} CANCELLED due to payment failure", orderId);
+        log.info("[OrderService] Order #{} - CANCELLED", orderId);
     }
 }

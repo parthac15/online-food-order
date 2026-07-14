@@ -26,7 +26,7 @@ public class OrderService {
         order.setStatus("PLACED");
 
         Order savedOrder = orderRepository.save(order);
-        log.info("Order placed with ID: {}", savedOrder.getId());
+        log.info("[OrderService] Order #{} - Status: PLACED, Workflow started", savedOrder.getId());
 
         // Publish message to ActiveMQ
         messagePublisher.publishOrderCreated(savedOrder.getId());
@@ -47,6 +47,6 @@ public class OrderService {
         Order order = getOrderById(orderId);
         order.setStatus(status);
         orderRepository.save(order);
-        log.info("Order {} status updated to: {}", orderId, status);
+        log.info("[OrderService] Order #{} - Status updated to: {}", orderId, status);
     }
 }

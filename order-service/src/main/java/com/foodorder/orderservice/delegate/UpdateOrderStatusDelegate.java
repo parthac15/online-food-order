@@ -18,6 +18,6 @@ public class UpdateOrderStatusDelegate implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         Long orderId = (Long) execution.getVariable("orderId");
         orderService.updateOrderStatus(orderId, "DELIVERED");
-        log.info("[CAMUNDA] Order {} marked as DELIVERED", orderId);
+        log.info("[OrderService] Order #{} - Workflow COMPLETE", orderId);
     }
 }

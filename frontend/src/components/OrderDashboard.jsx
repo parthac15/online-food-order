@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  FileText, CreditCard, ChefHat, Car, CheckCircle2, XCircle, 
+  FileText, CreditCard, ChefHat, Car, CheckCircle2, XCircle, Loader2,
   User, DollarSign, Hash, Utensils
 } from 'lucide-react';
 

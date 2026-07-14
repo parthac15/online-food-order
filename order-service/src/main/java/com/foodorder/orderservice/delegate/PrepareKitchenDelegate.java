@@ -41,7 +41,7 @@ public class PrepareKitchenDelegate implements JavaDelegate {
 
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(
-                    kitchenServiceUrl, kitchenRequest, String.class);
+                    java.util.Objects.requireNonNull(kitchenServiceUrl), kitchenRequest, String.class);
             String body = response.getBody() != null ? response.getBody() : "";
             log.info("[CAMUNDA] Kitchen response for orderId {}: {}", orderId, body);
         } catch (Exception e) {

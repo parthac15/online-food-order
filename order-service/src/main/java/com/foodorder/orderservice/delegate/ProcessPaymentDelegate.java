@@ -44,7 +44,7 @@ public class ProcessPaymentDelegate implements JavaDelegate {
 
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(
-                    paymentServiceUrl, paymentRequest, String.class);
+                    java.util.Objects.requireNonNull(paymentServiceUrl), paymentRequest, String.class);
 
             String body = response.getBody() != null ? response.getBody() : "{}";
             JsonNode responseBody = objectMapper.readTree(body);

@@ -23,6 +23,9 @@ public class ProcessPaymentDelegate implements JavaDelegate {
     private final OrderService orderService;
     private final ObjectMapper objectMapper;
 
+    @org.springframework.beans.factory.annotation.Value("${PAYMENT_SERVICE_URL:http://localhost:8081/api/payments}")
+    private String paymentServiceUrl;
+
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         Long orderId = (Long) execution.getVariable("orderId");
@@ -41,7 +44,7 @@ public class ProcessPaymentDelegate implements JavaDelegate {
 
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(
-                    "http://localhost:8081/api/payments", paymentRequest, String.class);
+                    paymentServiceUrl, paymentRequest, String.class);
 
             JsonNode responseBody = objectMapper.readTree(response.getBody());
             String paymentStatus = responseBody.get("status").asText();

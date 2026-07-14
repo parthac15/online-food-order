@@ -20,6 +20,9 @@ public class AssignDeliveryDelegate implements JavaDelegate {
     private final RestTemplate restTemplate;
     private final OrderService orderService;
 
+    @org.springframework.beans.factory.annotation.Value("${DELIVERY_SERVICE_URL:http://localhost:8083/api/deliveries}")
+    private String deliveryServiceUrl;
+
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         Long orderId = (Long) execution.getVariable("orderId");
@@ -34,7 +37,7 @@ public class AssignDeliveryDelegate implements JavaDelegate {
 
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(
-                    "http://localhost:8083/api/deliveries", deliveryRequest, String.class);
+                    deliveryServiceUrl, deliveryRequest, String.class);
             log.info("[CAMUNDA] Delivery response for orderId {}: {}", orderId, response.getBody());
         } catch (Exception e) {
             log.error("[CAMUNDA] Delivery assignment failed for orderId: {}", orderId, e);

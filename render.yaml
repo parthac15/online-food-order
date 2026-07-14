@@ -16,6 +16,18 @@ services:
         value: 8080
       - key: JAVA_TOOL_OPTIONS
         value: -Xmx400m
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://onlinefoodorder123-dummycontent15-dd37.h.aivencloud.com:11005/defaultdb?useSSL=true
+      - key: SPRING_DATASOURCE_USERNAME
+        value: avnadmin
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: PAYMENT_SERVICE_URL
+        value: https://payment-service.onrender.com/api/payments
+      - key: KITCHEN_SERVICE_URL
+        value: https://kitchen-service.onrender.com/api/kitchen/tickets
+      - key: DELIVERY_SERVICE_URL
+        value: https://delivery-service.onrender.com/api/deliveries
 
   - type: web
     name: payment-service
@@ -29,6 +41,12 @@ services:
         value: 8081
       - key: JAVA_TOOL_OPTIONS
         value: -Xmx400m
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://onlinefoodorder123-dummycontent15-dd37.h.aivencloud.com:11005/defaultdb?useSSL=true
+      - key: SPRING_DATASOURCE_USERNAME
+        value: avnadmin
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
 
   - type: web
     name: kitchen-service
@@ -42,6 +60,12 @@ services:
         value: 8082
       - key: JAVA_TOOL_OPTIONS
         value: -Xmx400m
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://onlinefoodorder123-dummycontent15-dd37.h.aivencloud.com:11005/defaultdb?useSSL=true
+      - key: SPRING_DATASOURCE_USERNAME
+        value: avnadmin
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
 
   - type: web
     name: delivery-service
@@ -55,3 +79,9 @@ services:
         value: 8083
       - key: JAVA_TOOL_OPTIONS
         value: -Xmx400m
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://onlinefoodorder123-dummycontent15-dd37.h.aivencloud.com:11005/defaultdb?useSSL=true
+      - key: SPRING_DATASOURCE_USERNAME
+        value: avnadmin
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false

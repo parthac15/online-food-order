@@ -46,7 +46,8 @@ public class ProcessPaymentDelegate implements JavaDelegate {
             ResponseEntity<String> response = restTemplate.postForEntity(
                     paymentServiceUrl, paymentRequest, String.class);
 
-            JsonNode responseBody = objectMapper.readTree(response.getBody());
+            String body = response.getBody() != null ? response.getBody() : "{}";
+            JsonNode responseBody = objectMapper.readTree(body);
             String paymentStatus = responseBody.get("status").asText();
 
             execution.setVariable("paymentStatus", paymentStatus);

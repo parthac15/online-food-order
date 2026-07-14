@@ -38,7 +38,8 @@ public class AssignDeliveryDelegate implements JavaDelegate {
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(
                     deliveryServiceUrl, deliveryRequest, String.class);
-            log.info("[CAMUNDA] Delivery response for orderId {}: {}", orderId, response.getBody());
+            String body = response.getBody() != null ? response.getBody() : "";
+            log.info("[CAMUNDA] Delivery response for orderId {}: {}", orderId, body);
         } catch (Exception e) {
             log.error("[CAMUNDA] Delivery assignment failed for orderId: {}", orderId, e);
         }

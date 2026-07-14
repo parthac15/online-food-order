@@ -42,7 +42,8 @@ public class PrepareKitchenDelegate implements JavaDelegate {
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(
                     kitchenServiceUrl, kitchenRequest, String.class);
-            log.info("[CAMUNDA] Kitchen response for orderId {}: {}", orderId, response.getBody());
+            String body = response.getBody() != null ? response.getBody() : "";
+            log.info("[CAMUNDA] Kitchen response for orderId {}: {}", orderId, body);
         } catch (Exception e) {
             log.error("[CAMUNDA] Kitchen prep failed for orderId: {}", orderId, e);
         }

@@ -4,7 +4,7 @@ import { UtensilsCrossed, Activity } from 'lucide-react';
 import OrderForm from './components/OrderForm';
 import OrderDashboard from './components/OrderDashboard';
 
-const API_BASE = '/api/orders';
+const API_BASE = import.meta.env.VITE_API_URL || '/api/orders';
 
 function App() {
   const [orders, setOrders] = useState([]);

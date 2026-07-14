@@ -5,24 +5,20 @@ spring:
   application:
     name: order-service
   datasource:
-    url: jdbc:h2:mem:orderdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/orderdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    database-platform: org.hibernate.dialect.MySQL8Dialect
   activemq:
     broker-url: vm://embedded?broker.persistent=false
     in-memory: true
 
-# Camunda uses its own H2 database for process engine state
+# Camunda uses the same MySQL datasource for process engine state
 camunda:
   bpm:
     admin-user:
@@ -30,7 +26,7 @@ camunda:
       password: admin
       firstName: Admin
     database:
-      type: h2
+      type: mysql
     filter:
       create: All tasks
     generic-properties:

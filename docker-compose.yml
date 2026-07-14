@@ -6,23 +6,24 @@ services:
     container_name: food_order_mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: food_order_db
+      MYSQL_DATABASE: orderdb
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+      start_period: 30s
 
   activemq:
     image: rmohr/activemq:5.15.9
     container_name: food_order_activemq
     ports:
-      - "61616:61616" # JMS port
-      - "8161:8161"   # Web Console port
+      - "61616:61616"   # JMS port
+      - "8161:8161"     # Web Console port
     environment:
       ACTIVEMQ_ADMIN_LOGIN: admin
       ACTIVEMQ_ADMIN_PASSWORD: admin

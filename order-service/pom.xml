@@ -27,12 +27,7 @@
             <version>7.19.0</version>
         </dependency>
 
-        <!-- H2 for Camunda internal DB (process engine) -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+        <!-- H2 removed - using MySQL (inherited from parent pom) -->
     </dependencies>
 
     <build>

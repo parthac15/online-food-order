@@ -14,11 +14,7 @@
     <name>Kitchen Service</name>
 
     <dependencies>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+        <!-- MySQL connector inherited from parent pom -->
     </dependencies>
 
     <build>

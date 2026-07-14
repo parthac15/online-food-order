@@ -19,4 +19,9 @@ public class PaymentController {
         PaymentResponse response = paymentService.processPayment(request);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Payment Service is UP");
+    }
 }

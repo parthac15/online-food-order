@@ -19,4 +19,9 @@ public class DeliveryController {
         DeliveryResponse response = deliveryService.assignDelivery(request);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Delivery Service is UP");
+    }
 }

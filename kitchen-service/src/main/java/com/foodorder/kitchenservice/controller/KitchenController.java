@@ -19,4 +19,9 @@ public class KitchenController {
         KitchenResponse response = kitchenService.prepareFood(request);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Kitchen Service is UP");
+    }
 }
